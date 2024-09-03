@@ -7,7 +7,14 @@ import { defineConfig } from 'vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
-  plugins: [vue(), vueJsx(), vueDevTools(), UnoCSS()],
+  plugins: [
+    vue(),
+    vueJsx(),
+    vueDevTools(),
+    UnoCSS({
+      configFile: '../uno.config.ts'
+    })
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

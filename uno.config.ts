@@ -1,6 +1,13 @@
 import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
 
 export default defineConfig({
+  theme: {
+    extend: {
+      fontFamily: {
+        nytimes: ['nytimes', 'sans-serif']
+      }
+    }
+  },
   presets: [
     presetUno(),
     presetAttributify(),
