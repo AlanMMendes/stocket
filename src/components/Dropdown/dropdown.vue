@@ -1,7 +1,7 @@
 <template>
-  <div class="w-20" @mouseover="toggleDropdown" @mouseleave="closeDropdown">
+  <div class="w-auto h-12" @mouseover="toggleDropdown" @mouseleave="closeDropdown">
     <a
-      class="text-emerald py-2 cursor-pointer rounded hover:underline hover:underline-emerald justify-center items-center flex"
+      class="text-emerald flex justify-center items-center py-2 cursor-pointer rounded hover:underline hover:underline-emerald"
     >
       {{ props.title }}
 
@@ -43,12 +43,21 @@
 
     <div
       v-show="isDropdownOpen"
-      class="absolute h-54 py-2 px-24 rounded-sm left-0 bg-dark-3 text-gray-900 border border-gray-200 shadow-lg w-full items-center flex"
+      class="absolute h-auto py-5 border px-24 rounded-sm left-0 bg-dark-3 text-gray-900 border border-gray-200 shadow-lg w-full flex"
     >
-      <div class="flex flex-col items-start justify-start gap-4">
-        <ul class="list-none text-emerald w-32 flex flex-col gap-2">
+      <div class="flex flex-col h-auto min-h-52 items-start justify-start gap-4 w-full">
+        <div class="flex flex-col items-center justify-center gap-4 w-32">
           <h1 class="text-xs text-gray">SECTIONS</h1>
-          <li v-for="item in props.items" :key="item.id">{{ item.name }}</li>
+        </div>
+
+        <ul class="list-none text-emerald w-auto grid grid-cols-2 gap-4 grid-content-start">
+          <li v-for="item in props.items" :key="item.id">
+            <a
+              class="underline-transparent hover:underline-emerald text-emerald"
+              :href="url(item.name.replace(/\s+/g, ''))"
+              >{{ item.name }}</a
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -57,7 +66,7 @@
 
 <script setup lang="ts">
 import { defineProps, ref } from 'vue'
-
+const isDropdownOpen = ref(false)
 const props = defineProps({
   title: {
     type: String,
@@ -71,7 +80,9 @@ const props = defineProps({
   }
 } as any)
 
-const isDropdownOpen = ref(false)
+const url = (name: string) => {
+  return `/section/${name}`
+}
 
 const toggleDropdown = () => {
   isDropdownOpen.value = true

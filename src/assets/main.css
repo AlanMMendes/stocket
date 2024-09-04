@@ -3,7 +3,8 @@
 /* Garante que o HTML e o body ocupem a altura total da tela */
 html,
 body {
-  height: 100%;
+  width: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Opcional: garante que padding e border sejam incluídos no cálculo de largura e altura */
